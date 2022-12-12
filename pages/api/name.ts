@@ -13,24 +13,35 @@ function generatePrompt({ tweet }: { tweet: string }) {
 `;
 }
 
-export type Response =
+export type NameResponse =
   | {
       result: "success";
       nickname: string;
+      prompt: string;
       rawCompletion: string;
     }
   | {
       result: "failure";
       message: string;
-      body: any;
-      prompt: string;
-      rawCompletion?: string;
+      extension?: {
+        body: any;
+        prompt: string;
+        rawCompletion?: string;
+      };
     };
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response>
+  res: NextApiResponse<NameResponse>
 ) {
+  if (req.method !== "POST") {
+    res.status(405).json({
+      result: "failure",
+      message: "Only POST request allowed",
+    });
+    return;
+  }
+
   const prompt = generatePrompt(req.body);
   const completion = await openai.createCompletion({
     model: "text-davinci-002",
@@ -39,19 +50,25 @@ export default async function handler(
     max_tokens: 100,
   });
   const rawCompletion = completion.data.choices[0].text;
-  const nickname = rawCompletion?.split("「")[1];
+  // NOTE: Return `GOOD NICKNAME 」` ...
+  const nickname = rawCompletion?.split("」")[0];
+  console.log({ nickname, rawCompletion });
+
   if (rawCompletion == null || nickname == null) {
     res.status(200).json({
       result: "failure",
       message: "ニックネームが検出できませんでした",
-      body: req.body,
-      prompt,
-      rawCompletion,
+      extension: {
+        body: req.body,
+        prompt,
+        rawCompletion,
+      },
     });
   } else {
     res.status(200).json({
       result: "success",
       nickname,
+      prompt,
       rawCompletion,
     });
   }
