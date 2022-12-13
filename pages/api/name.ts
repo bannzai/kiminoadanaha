@@ -53,7 +53,7 @@ export default async function handler(
     model: "text-davinci-002",
     prompt: prompt,
     temperature: 0.9,
-    max_tokens: 100,
+    max_tokens: 140 * 10 + 100,
   });
   const rawCompletion = completion.data.choices[0].text;
   // NOTE: Return `GOOD NICKNAME 」` ...
