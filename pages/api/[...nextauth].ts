@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import TwitterProvider from "next-auth/providers/twitter";
 
-export default NextAuth({
+export const authOptions: AuthOptions = {
   //   debug: process.env.NODE_ENV === "development",
   providers: [
     TwitterProvider({
@@ -12,22 +12,31 @@ export default NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET!,
   callbacks: {
-    jwt: async ({ token, account }) => {
+    async jwt({ token, account, user }) {
       if (account != null) {
-        if (account.accessToken) {
-          token.accessToken = account.access_token;
+        if (account.oauth_token) {
+          token.accessToken = account.oauth_token as string;
         }
-
-        if (account.refreshToken) {
-          token.refreshToken = account.refresh_token;
+        if (account.oauth_token_secret) {
+          token.accessTokenSecret = account.oauth_token_secret as string;
         }
+        if (account.userId) {
+          token.userID = account.userId;
+        }
+      }
+      if (user?.id) {
+        token.userID = user.id;
       }
 
       return token;
     },
-    session: async ({ session, token }) => {
+    async session({ session, token }) {
+      session.user.userID = token.userID;
       session.user.accessToken = token.accessToken;
+      session.user.accessTokenSecret = token.accessTokenSecret;
       return session;
     },
   },
-});
+};
+
+export default NextAuth(authOptions);
