@@ -6,10 +6,15 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-function generatePrompt({ tweet }: { tweet: string }) {
-  return `「${tweet}」
+function generatePrompt({ tweets }: { tweets: string[] }) {
+  let embed = "";
+  for (const tweet of tweets) {
+    embed += `「${tweet}」`;
+  }
 
-この発言をする人のピッタリなニックネームをひとつ決めるなら、「
+  return `${embed}
+
+この${tweets.length}の発言をする人のピッタリなニックネームをひとつ決めるなら、「
 `;
 }
 
