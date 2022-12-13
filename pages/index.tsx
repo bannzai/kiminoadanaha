@@ -71,7 +71,7 @@ export default function Home() {
       {named && (
         <div>
           <Text>Named: {named.nickname}</Text>
-          <Text>OpenAI Say: {named.prompt}</Text>
+          <Text aria-multiline={true}>OpenAI Say: {named.fullText}</Text>
         </div>
       )}
       {error && (

@@ -19,6 +19,7 @@ export type NameResponse =
       nickname: string;
       prompt: string;
       rawCompletion: string;
+      fullText: string;
     }
   | {
       result: "failure";
@@ -70,6 +71,7 @@ export default async function handler(
       nickname,
       prompt,
       rawCompletion,
+      fullText: prompt + rawCompletion,
     });
   }
 }
