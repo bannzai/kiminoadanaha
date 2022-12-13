@@ -11,7 +11,7 @@ import {
   AlertDescription,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { NameResponse } from "./api/name";
+import { NameResponse } from "../pages/api/name";
 
 export default function Home() {
   const [tweet, setTweet] = useState("");

@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import TwitterProvider from "next-auth/providers/twitter";
 
 export default NextAuth({
+  //   debug: process.env.NODE_ENV === "development",
   providers: [
     TwitterProvider({
       clientId: process.env.TWITTER_API_KEY!,
@@ -10,7 +11,6 @@ export default NextAuth({
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET!,
-  //   debug: process.env.NODE_ENV === "development",
   callbacks: {
     jwt: async ({ token, account }) => {
       if (account != null) {
