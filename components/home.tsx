@@ -57,7 +57,7 @@ export default function Home() {
       <Textarea
         value={tweet}
         onChange={handleInputChange}
-        placeholder="Here is a sample placeholder"
+        placeholder="ツイートを入力しましょう"
         size="sm"
       />
       <Button
