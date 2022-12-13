@@ -11,4 +11,23 @@ export default NextAuth({
   ],
   secret: process.env.NEXTAUTH_SECRET!,
   //   debug: process.env.NODE_ENV === "development",
+  callbacks: {
+    jwt: async ({ token, account }) => {
+      if (account != null) {
+        if (account.accessToken) {
+          token.accessToken = account.access_token;
+        }
+
+        if (account.refreshToken) {
+          token.refreshToken = account.refresh_token;
+        }
+      }
+
+      return token;
+    },
+    session: async ({ session, token }) => {
+      session.user.accessToken = token.accessToken;
+      return session;
+    },
+  },
 });
