@@ -101,8 +101,8 @@ export default function Home() {
       </Button>
       {named && (
         <div>
-          <Text>Named: {named.nickname}</Text>
-          <Text aria-multiline={true}>OpenAI Say: {named.fullText}</Text>
+          <Text>ニックネーム: {named.nickname}</Text>
+          <Text aria-multiline={true}>Open AI Response: {named.fullText}</Text>
         </div>
       )}
       {error && (

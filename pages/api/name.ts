@@ -14,7 +14,7 @@ function generatePrompt({ tweets }: { tweets: string[] }) {
 
   return `${embed}
 
-この${tweets.length}の発言をする人のピッタリなニックネームをひとつ決めるなら、「
+この${tweets.length}つの発言をする人にピッタリなニックネームをひとつ決めるなら、「
 `;
 }
 
@@ -53,7 +53,7 @@ export default async function handler(
     model: "text-davinci-002",
     prompt: prompt,
     temperature: 0.9,
-    max_tokens: 140 * 10 + 100,
+    max_tokens: 500,
   });
   const rawCompletion = completion.data.choices[0].text;
   // NOTE: Return `GOOD NICKNAME 」` ...

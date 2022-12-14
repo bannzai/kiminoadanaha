@@ -43,7 +43,12 @@ export default async function handler(
   const twitterClient = new TwitterApi(tokens);
   const readOnlyClient = twitterClient.readOnly;
   try {
-    const response = await readOnlyClient.v1.userTimeline(userID as string);
+    const response = await readOnlyClient.v1.userTimeline(userID as string, {
+      count: 10,
+      exclude_replies: true,
+      include_rts: false,
+    });
+    console.log(JSON.stringify({ response }));
     res.status(200).json({
       result: "success",
       response: response.tweets.map((tweet) => tweet.full_text ?? tweet.text),
