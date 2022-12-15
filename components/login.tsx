@@ -1,14 +1,14 @@
 import { signIn } from "next-auth/react";
-import { Button, Center, Text } from "@chakra-ui/react";
+import { Button, Center, Container, Text } from "@chakra-ui/react";
 
 export default function Login() {
   return (
-    <>
-      <Button w={"full"} color={"#1DA1F2"} onClick={() => signIn()}>
-        <Center>
-          <Text>Continue with Twitter</Text>
-        </Center>
-      </Button>
-    </>
+    <Container maxWidth={"300px"}>
+      <Center h="100vh">
+        <Button w={"full"} background={"#359BF0"} onClick={() => signIn()}>
+          <Text color={"white"}>Continue with Twitter</Text>
+        </Button>
+      </Center>
+    </Container>
   );
 }
