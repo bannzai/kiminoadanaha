@@ -44,9 +44,10 @@ export default async function handler(
   const readOnlyClient = twitterClient.readOnly;
   try {
     const response = await readOnlyClient.v1.userTimeline(userID as string, {
-      count: 10,
+      count: 20,
       exclude_replies: true,
       include_rts: false,
+      trim_user: true,
     });
 
     res.status(200).json({

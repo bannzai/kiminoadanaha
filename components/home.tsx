@@ -88,6 +88,14 @@ export default function Home() {
     f();
   };
 
+  const length = Array.from(Array(named?.nickname.length ?? 0).keys());
+  const top = Array.from(length)
+    .map(() => "人")
+    .join("");
+  const bottom = Array.from(length)
+    .map(() => "Y^")
+    .join("");
+
   return (
     <Container maxWidth={"800px"}>
       <Center h={"100vh"}>
@@ -118,11 +126,19 @@ export default function Home() {
               </Button>
             </VStack>
 
-            <VStack>
+            <VStack display={"flex"}>
               {named && (
-                <div>
-                  <Text>あだ名は: {named.nickname}</Text>
-                </div>
+                <VStack>
+                  <Text fontWeight={"bold"} fontSize={"2xl"}>
+                    {top}
+                  </Text>
+                  <Text fontWeight={"bold"} fontSize={"2xl"}>
+                    {`＞　${named.nickname}　＜`}
+                  </Text>
+                  <Text fontWeight={"bold"} fontSize={"2xl"}>
+                    {bottom}
+                  </Text>
+                </VStack>
               )}
               {error && (
                 <div>
