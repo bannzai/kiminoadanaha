@@ -143,7 +143,7 @@ export default function Home() {
                   <HStack>
                     <TwitterShareButton
                       title={`私のあだ名は「${named.nickname}」です。あなたのあだ名は？`}
-                      url={"https://localhost:3000"}
+                      url={"https://kiminoadanaha.vercel.app/"}
                       style={{
                         background: "#359BF0",
                         borderRadius: "50%",
