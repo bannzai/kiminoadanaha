@@ -51,7 +51,7 @@ export default async function handler(
   const completion = await openai.createCompletion({
     model: "text-davinci-002",
     prompt: prompt,
-    max_tokens: 20,
+    max_tokens: 25,
     best_of: 1,
     suffix: "」です！",
   });
