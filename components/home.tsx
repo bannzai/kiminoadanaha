@@ -6,6 +6,13 @@ import {
   AlertIcon,
   AlertTitle,
   AlertDescription,
+  Center,
+  VStack,
+  HStack,
+  Box,
+  Spacer,
+  Image,
+  Container,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { NameResponse } from "../pages/api/name";
@@ -16,7 +23,6 @@ import { GetServerSideProps } from "next";
 export default function Home() {
   const { data: session } = useSession({ required: true });
   console.log({ session });
-  const [tweet, setTweet] = useState("");
   const [named, setNamed] = useState<Extract<
     NameResponse,
     { result: "success" }
@@ -55,11 +61,6 @@ export default function Home() {
     f();
   }, [tweets]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const inputValue = e.target.value;
-    setTweet(inputValue);
-  };
-
   const handleOnClick = () => {
     const f = async () => {
       setLoading(true);
@@ -83,37 +84,57 @@ export default function Home() {
   };
 
   return (
-    <>
-      <Text mb="8px">Tweet</Text>
-      <Textarea
-        value={tweet}
-        onChange={handleInputChange}
-        placeholder="ツイートを入力しましょう"
-        size="sm"
-      />
-      <Button
-        colorScheme="teal"
-        size="md"
-        onClick={handleOnClick}
-        isLoading={loading}
-      >
-        Button
-      </Button>
-      {named && (
-        <div>
-          <Text>あだ名は: {named.nickname}</Text>
-          <Text aria-multiline={true}>Open AI Response: {named.fullText}</Text>
-        </div>
-      )}
-      {error && (
-        <div>
-          <Alert status="error">
-            <AlertIcon />
-            <AlertTitle>リクエストに失敗しました</AlertTitle>
-            <AlertDescription>{error.message}</AlertDescription>
-          </Alert>
-        </div>
-      )}
-    </>
+    <Container maxWidth={"800px"}>
+      <Center h={"100vh"}>
+        <Box display="flex">
+          <VStack>
+            <VStack justify={"center"}>
+              <HStack justify={"start"} width={"100%"}>
+                <Text
+                  fontSize={"2xl"}
+                  fontWeight={"bold"}
+                  justifyItems={"start"}
+                >
+                  君のあだ名は
+                </Text>
+                <Spacer />
+              </HStack>
+              <Box boxSize="sm">
+                <Image src="/mensetsu_business_ai.png" alt="AIばあちゃん" />
+              </Box>
+              <Button
+                colorScheme="teal"
+                size="md"
+                width={"100%"}
+                onClick={handleOnClick}
+                isLoading={loading}
+              >
+                直近のツイートから命名スタート
+              </Button>
+            </VStack>
+
+            <VStack>
+              {named && (
+                <div>
+                  <Text>あだ名は: {named.nickname}</Text>
+                  <Text aria-multiline={true}>
+                    Open AI Response: {named.fullText}
+                  </Text>
+                </div>
+              )}
+              {error && (
+                <div>
+                  <Alert status="error">
+                    <AlertIcon />
+                    <AlertTitle>リクエストに失敗しました</AlertTitle>
+                    <AlertDescription>{error.message}</AlertDescription>
+                  </Alert>
+                </div>
+              )}
+            </VStack>
+          </VStack>
+        </Box>
+      </Center>
+    </Container>
   );
 }
