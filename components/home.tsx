@@ -101,7 +101,7 @@ export default function Home() {
       </Button>
       {named && (
         <div>
-          <Text>ニックネーム: {named.nickname}</Text>
+          <Text>あだ名は: {named.nickname}</Text>
           <Text aria-multiline={true}>Open AI Response: {named.fullText}</Text>
         </div>
       )}

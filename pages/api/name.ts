@@ -14,7 +14,7 @@ function generatePrompt({ tweets }: { tweets: string[] }) {
 
   return `${embed}
 
-この${tweets.length}つの発言をする人にピッタリなニックネームをひとつ決めるなら、「
+この${tweets.length}つの発言をする人にピッタリなあだ名をひとつ決めるなら、「
 `;
 }
 
@@ -63,7 +63,7 @@ export default async function handler(
   if (rawCompletion == null || nickname == null) {
     res.status(200).json({
       result: "failure",
-      message: "ニックネームが検出できませんでした",
+      message: "あだ名が検出できませんでした",
       extension: {
         body: req.body,
         prompt,
