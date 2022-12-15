@@ -14,7 +14,7 @@ function generatePrompt({ tweets }: { tweets: string[] }) {
 
   return `${embed}
 
-この${tweets.length}つの発言をする人にぴったりなあだ名は、「`;
+この${tweets.length}個の発言をする人にぴったりなあだ名は、「`;
 }
 
 export type NameResponse =
