@@ -62,6 +62,7 @@ export default function Home() {
 
   useEffect(() => {
     if (named?.fullText) {
+      // Keep console log on prod
       console.log(named.fullText);
     }
   }, [named?.fullText]);
