@@ -61,6 +61,12 @@ export default function Home() {
     f();
   }, [tweets]);
 
+  useEffect(() => {
+    if (named?.fullText) {
+      console.log(named.fullText);
+    }
+  }, [named?.fullText]);
+
   const handleOnClick = () => {
     const f = async () => {
       setLoading(true);
@@ -117,9 +123,6 @@ export default function Home() {
               {named && (
                 <div>
                   <Text>あだ名は: {named.nickname}</Text>
-                  <Text aria-multiline={true}>
-                    Open AI Response: {named.fullText}
-                  </Text>
                 </div>
               )}
               {error && (
