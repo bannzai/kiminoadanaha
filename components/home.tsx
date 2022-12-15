@@ -17,8 +17,9 @@ import {
 import { useEffect, useState } from "react";
 import { NameResponse } from "../pages/api/name";
 import { TweetResponse } from "../pages/api/tweets/[userID]";
-import { getSession, useSession } from "next-auth/react";
-import { GetServerSideProps } from "next";
+import { TwitterShareButton } from "react-share";
+import { FaTwitter } from "react-icons/fa";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
   const { data: session } = useSession({ required: true });
@@ -138,6 +139,23 @@ export default function Home() {
                   <Text fontWeight={"bold"} fontSize={"2xl"}>
                     {bottom}
                   </Text>
+
+                  <HStack>
+                    <TwitterShareButton
+                      title={`私のあだ名は「${named.nickname}」です。あなたのあだ名は？`}
+                      url={"https://localhost:3000"}
+                      style={{
+                        background: "#359BF0",
+                        borderRadius: "50%",
+                        padding: "0.5rem",
+                      }}
+                    >
+                      <Box p={0.8}>
+                        <FaTwitter color={"white"} />
+                      </Box>
+                    </TwitterShareButton>
+                    <Text>でシェアする</Text>
+                  </HStack>
                 </VStack>
               )}
               {error && (

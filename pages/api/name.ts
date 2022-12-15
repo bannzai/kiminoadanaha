@@ -14,8 +14,7 @@ function generatePrompt({ tweets }: { tweets: string[] }) {
 
   return `${embed}
 
-この${tweets.length}つの発言をする人へのあだ名は、「
-`;
+この${tweets.length}つの発言をする人にぴったりなあだ名は、「`;
 }
 
 export type NameResponse =
@@ -52,13 +51,13 @@ export default async function handler(
   const completion = await openai.createCompletion({
     model: "text-davinci-002",
     prompt: prompt,
-    max_tokens: 14,
+    max_tokens: 20,
     best_of: 1,
     suffix: "」です！",
   });
   const rawCompletion = completion.data.choices[0].text;
   // NOTE: Return `GOOD NICKNAME 」` ...
-  const nickname = rawCompletion?.split("」")[0];
+  const nickname = rawCompletion?.split("」")[0].trimEnd();
 
   if (rawCompletion == null || nickname == null) {
     res.status(200).json({
