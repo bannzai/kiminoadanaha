@@ -22,7 +22,6 @@ import { GetServerSideProps } from "next";
 
 export default function Home() {
   const { data: session } = useSession({ required: true });
-  console.log({ session });
   const [named, setNamed] = useState<Extract<
     NameResponse,
     { result: "success" }
@@ -79,7 +78,6 @@ export default function Home() {
       });
       const tweets = await (response.json() as Promise<TweetResponse>);
       if (tweets.result === "success") {
-        console.log({ res: tweets.response ?? "abc" });
         setTweets(tweets.response);
       } else {
         setError(tweets);

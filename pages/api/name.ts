@@ -58,7 +58,6 @@ export default async function handler(
   const rawCompletion = completion.data.choices[0].text;
   // NOTE: Return `GOOD NICKNAME 」` ...
   const nickname = rawCompletion?.split("」")[0];
-  console.log({ nickname, rawCompletion });
 
   if (rawCompletion == null || nickname == null) {
     res.status(200).json({

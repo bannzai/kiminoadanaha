@@ -39,7 +39,7 @@ export default async function handler(
     accessToken: req.headers["x-twitter-access-token"] as string,
     accessSecret: req.headers["x-twitter-access-token-secret"] as string,
   };
-  console.log({ tokens, userID });
+
   const twitterClient = new TwitterApi(tokens);
   const readOnlyClient = twitterClient.readOnly;
   try {
@@ -48,7 +48,7 @@ export default async function handler(
       exclude_replies: true,
       include_rts: false,
     });
-    console.log(JSON.stringify({ response }));
+
     res.status(200).json({
       result: "success",
       response: response.tweets.map((tweet) => tweet.full_text ?? tweet.text),
