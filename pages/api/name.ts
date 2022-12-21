@@ -53,7 +53,7 @@ export default async function handler(
     prompt: prompt,
     max_tokens: 25,
     best_of: 1,
-    suffix: "点です！",
+    suffix: "」です！",
   });
   const rawCompletion = completion.data.choices[0].text;
   // NOTE: Return `GOOD NICKNAME 」` ...
