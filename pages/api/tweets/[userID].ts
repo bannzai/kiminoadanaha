@@ -1,13 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Configuration, OpenAIApi } from "openai";
-import { unstable_getServerSession } from "next-auth";
-import { authOptions } from "../[...nextauth]";
-import { getSession } from "next-auth/react";
-import {
-  TwitterApi,
-  TwitterApiTokens,
-  UserTimelineV1Paginator,
-} from "twitter-api-v2";
+import { TwitterApi, TwitterApiTokens } from "twitter-api-v2";
 
 export type TweetResponse =
   | {

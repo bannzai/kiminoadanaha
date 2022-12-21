@@ -12,9 +12,7 @@ function generatePrompt({ tweets }: { tweets: string[] }) {
     embed += `「${tweet}」`;
   }
 
-  return `${embed}
-
-この${tweets.length}個の発言をする人にぴったりなあだ名は、「`;
+  return `マッチングアプリでマッチした女性へ最初に送るメッセージが「唐揚げ好き」の場合の点数は`;
 }
 
 export type NameResponse =
@@ -53,7 +51,7 @@ export default async function handler(
     prompt: prompt,
     max_tokens: 25,
     best_of: 1,
-    suffix: "」です！",
+    suffix: "点です！",
   });
   const rawCompletion = completion.data.choices[0].text;
   // NOTE: Return `GOOD NICKNAME 」` ...
