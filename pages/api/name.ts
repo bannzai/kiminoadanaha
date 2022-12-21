@@ -12,7 +12,9 @@ function generatePrompt({ tweets }: { tweets: string[] }) {
     embed += `「${tweet}」`;
   }
 
-  return `マッチングアプリでマッチした女性へ最初に送るメッセージが「唐揚げ好き」の場合の点数は`;
+  return `${embed}
+
+この${tweets.length}個の発言をする人にぴったりなあだ名は、「`;
 }
 
 export type NameResponse =
